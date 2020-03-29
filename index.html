@@ -1,0 +1,138 @@
+<html>
+<head>
+    <style>
+    	body{
+    		margin: 0;
+    
+    	}
+    </style>
+</head>
+<body>
+
+    <canvas id="myCanvas"></canvas>
+    <script src="three.js"></script>
+
+    <script>
+
+    var renderer,
+    	scene,
+    	camera,
+    	myCanvas = document.getElementById('myCanvas');
+
+    //RENDERER
+    renderer = new THREE.WebGLRenderer({
+      canvas: myCanvas, 
+      antialias: true
+    });
+    renderer.setClearColor(0x333333);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    //SCENE
+    scene = new THREE.Scene();
+    //MATERIAL
+
+    var material2 = new THREE.MeshPhongMaterial();
+    var material3 = new THREE.MeshLambertMaterial({color:0xfbac13});
+
+    //GEOMETRY
+    var geometry1 = new THREE.SphereGeometry(5, 5, 5);
+    var geometry2 = new THREE.SphereGeometry(7, 7, 7);
+    var geometry3 = new THREE.SphereGeometry(7, 7, 7);
+    var geometry4 = new THREE.SphereGeometry(7, 7, 7);
+    var geometry5 = new THREE.SphereGeometry(8, 8, 8);
+    var geometry6 = new THREE.SphereGeometry(10, 10, 10);
+    var geometry7 = new THREE.SphereGeometry(12, 12, 12);
+    var geometry8 = new THREE.SphereGeometry(13, 13, 13);
+    var geometry = new THREE.SphereGeometry(40, 40, 40);
+
+    var mesh1 = new THREE.Mesh(geometry1, material2);
+    mesh1.position.z = 5;
+    mesh1.position.x = -80;
+    mesh1.position.y = -50;
+    scene.add(mesh1);
+
+    var mesh2 = new THREE.Mesh(geometry2, material2);
+    mesh2.position.z = 40;
+    mesh2.position.x = -90;
+    mesh2.position.y = -50;
+    scene.add(mesh2);
+
+    var mesh3 = new THREE.Mesh(geometry3, material2);
+    mesh3.position.z = 100;
+    mesh3.position.x = -105;
+    mesh3.position.y = -50;
+    scene.add(mesh3);
+
+    var mesh4 = new THREE.Mesh(geometry4, material2);
+    mesh4.position.z = 120;
+    mesh4.position.x = -130;
+    mesh4.position.y = -50;
+    scene.add(mesh4);
+
+    var mesh5 = new THREE.Mesh(geometry5, material2);
+    mesh5.position.z = 170;
+    mesh5.position.x = -160;
+    mesh5.position.y = -50;
+    scene.add(mesh5);
+
+    var mesh6 = new THREE.Mesh(geometry6, material2);
+    mesh6.position.z = 160;
+    mesh6.position.x = -200;
+    mesh6.position.y = -50;
+    scene.add(mesh6);
+
+    var mesh7 = new THREE.Mesh(geometry7, material2);
+    mesh7.position.z = 190;
+    mesh7.position.x = -250;
+    mesh7.position.y = -50;
+    scene.add(mesh7);
+
+    var mesh8 = new THREE.Mesh(geometry8, material2);
+    mesh8.position.z = 320;
+    mesh8.position.x = -290;
+    mesh8.position.y = -50;
+    scene.add(mesh8);
+
+    var mesh = new THREE.Mesh(geometry, material3);
+    mesh.rotation.x = -90 * (Math.PI / 180);
+    mesh.position.y = -50;
+    scene.add(mesh);
+    //LIGHTS
+    //ambient light
+    var light = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(light);
+     //pointlight
+     var light = new THREE.PointLight(0xD8DE1F, 2.0, 600);
+     scene.add(light);
+      //perspective camera
+    // camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 300, 10000 );
+
+    //orthographic camera
+    camera = new THREE.OrthographicCamera(-300, 300, 200, -200, 0.3, 9000);
+    render();
+
+
+    var delta = 0;
+    function render() {
+
+    
+        delta += 0.001;
+
+        // spotLightHelper.update();
+        // directionalLightHelper.update();
+
+
+        camera.lookAt(light.position);
+        camera.position.x = Math.sin(delta) * 2000;
+        camera.position.z = Math.cos(delta) * 2000;
+
+    	renderer.render(scene, camera);
+        // shadowMapViewer.render(renderer);
+
+    	requestAnimationFrame(render);
+    }
+
+    </script>
+</body>
+</html>
